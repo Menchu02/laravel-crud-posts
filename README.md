@@ -1,61 +1,136 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Proyecto Laravel – CRUD de Posts, Filtros, Compras por Email y Google Meet
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este proyecto es una aplicación desarrollada en **Laravel 10** como parte de una prueba técnica para acceder a unas prácticas como desarrolladora web.  
+Incluye un **CRUD completo de posts**, sistema de **filtros dinámicos**, una función para **comprar un post mediante email**, y una integración real con **Google Calendar API** para generar enlaces de **Google Meet** desde la aplicación.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tecnologías utilizadas
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   PHP 8+
+-   Laravel 10
+-   Composer
+-   Blade Templates
+-   MySQL
+-   XAMPP + phpMyAdmin
+-   Laravel Socialite
+-   Google Cloud Console
+-   Google Calendar API
+-   HTML / CSS / Bootstrap
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 1. CRUD Completo de Posts
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+El proyecto permite gestionar posts con todas las operaciones CRUD:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   Crear publicaciones
+-   Listar posts
+-   Editar posts
+-   Eliminar posts
+-   Ver un post individual
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Cada vista incluye validación, mensajes de error y formularios funcionales.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🔍 2. Filtro de Posts
 
-### Premium Partners
+La aplicación permite filtrar posts por título.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 🛒 3. Comprar un Post mediante Email
 
-## Contributing
+En cada vista individual de un post, el usuario puede introducir un correo para “comprar” ese post.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Funcionamiento interno:
 
-## Code of Conduct
+Se valida el email recibido
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Se crea un registro en la tabla purchases
 
-## Security Vulnerabilities
+Se vincula la compra al post
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Se registra la fecha de la compra
 
-## License
+No se procesa ningún pago real; solo se simula el flujo.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 4. Integración con Google Meet (Google Calendar API)
+
+El proyecto permite generar automáticamente un enlace de Google Meet desde Laravel gracias a la integración con Google Calendar API.
+
+Flujo completo:
+
+El usuario pulsa “Conectar con Google”.
+
+Se abre la pantalla oficial de OAuth de Google.
+
+Laravel obtiene google_token y google_refresh_token.
+
+Los tokens se guardan en la base de datos.
+
+El usuario selecciona “Crear reunión”.
+
+Laravel crea un evento en Google Calendar.
+
+Google devuelve automáticamente un enlace de Google Meet.
+
+El enlace se muestra en la vista /meeting.
+
+GoogleCalendarService
+
+Se creó un servicio personalizado que:
+
+Inicializa el cliente de Google
+
+Comprueba si el token está expirado
+
+Renueva automáticamente el token si es necesario
+
+Crea eventos en Google Calendar
+
+Obtiene enlaces Meet
+
+Guarda nuevos tokens en BD cuando Google los envía
+
+# Estructura técnica
+
+Controladores:
+
+PostController
+
+PurchaseController
+
+GoogleAuthController
+
+DashboardController
+
+Modelos:
+
+Post
+
+Purchase
+
+User (con campos adicionales para Google)
+
+Servicios:
+
+App\Services\GoogleCalendarService.php
+
+Tablas principales:
+
+posts
+
+purchases
+
+users
+
+# Funciones implementadas
+
+✔ CRUD completo
+✔ Filtros
+✔ Sistema de compras por email
+✔ Integración OAuth con Google
+✔ Creación de eventos en Google Calendar
+✔ Enlace automático de Google Meet
+✔ Renovación de tokens
+✔ Uso de XAMPP y phpMyAdmin
