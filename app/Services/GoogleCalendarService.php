@@ -37,12 +37,12 @@ class GoogleCalendarService
         $accessToken = [
             'access_token' => $user->google_token,
             'refresh_token' => $user->google_refresh_token,
-            'expires_in' => 3600, // Google tokens expiran en 1 hora (3600s)
+            'expires_in' => 3600, 
         ];
         
         $this->client->setAccessToken($accessToken);
 
-        // 3. Manejar la expiración del token (¡La parte más importante!)
+        // 3. Manejar la expiración del token
         if ($this->client->isAccessTokenExpired()) {
             if ($user->google_refresh_token) {
                 try {
@@ -52,7 +52,7 @@ class GoogleCalendarService
                     // Obtener el nuevo token y guardarlo
                     $newAccessToken = $this->client->getAccessToken();
 
-                    // ¡Guardar el nuevo token en la base de datos!
+                    // Guardar el nuevo token en la base de datos
                     $this->user->google_token = $newAccessToken['access_token'];
                     // Si Google envía un nuevo refresh_token (lo cual es raro, pero posible), lo guardamos.
                     if (isset($newAccessToken['refresh_token'])) {

@@ -1,6 +1,6 @@
 # Proyecto Laravel – CRUD de Posts, Filtros, Compras por Email y Google Meet
 
-Este proyecto es una aplicación desarrollada en **Laravel 10** como parte de una prueba técnica para acceder a unas prácticas como desarrolladora web.  
+Este proyecto es una aplicación desarrollada en **Laravel 12** como parte de una prueba técnica para acceder a unas prácticas como desarrolladora web.  
 Incluye un **CRUD completo de posts**, sistema de **filtros dinámicos**, una función para **comprar un post mediante email**, y una integración real con **Google Calendar API** para generar enlaces de **Google Meet** desde la aplicación.
 
 ---

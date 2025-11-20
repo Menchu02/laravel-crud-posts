@@ -13,7 +13,16 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
+        //Esto genera 100 posts usando el PostFactory
+        //Cada post tendrá datos aleatorios según la definición del factory 
+        //(title, category, content, published_at).
           Post::factory(100)->create();
+
+
+
+
+
+        //-----------------------------------------------------------
         // $post= new Post();
         // $post->title="Post 1";
         // $post->category="Categoria 1";

@@ -44,6 +44,7 @@ class PostController extends Controller
         return view("posts.create"); 
     }
 
+    //CREAR EN LA BASE DE DATOS
     // 3. STORE: Guarda los datos de un nuevo post en la BD (POST)
     public function store(Request $request){
         // dd($request->all());
@@ -106,17 +107,19 @@ class PostController extends Controller
     // Recibe por parámetro el objeto Post que se debe modificar y los cambios realizados en $request
     public function update(Request $request, Post $post)
     {
-        // $post ya es el objeto que queremos modificar, gracias a la Inyección de Modelo.
-        // Asignamos los datos modificados a los campos del post
-        $post->title = $request->title;
-        $post->category = $request->category;
-        $post->content = $request->content;
+        //Asignacion masiva:
+        $post->update($request->all());
 
-        $post->save();
+
+       
+        // Asignacion manual:
+        // $post->title = $request->title;
+        // $post->category = $request->category;
+        // $post->content = $request->content;
+
+        // $post->save();
 
         // cuando acabe la función, llévame a la url individual del post
-        // Importante: Usamos $post->id en el redirect
-       // return redirect("/posts/{$post->id}");
        return redirect()->route('posts.show', $post);
     }
 

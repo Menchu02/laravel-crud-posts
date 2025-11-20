@@ -17,10 +17,14 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
+            //Genera Título aleatorio
             //SENTENCE() = ORACION
             "title"=>fake()->sentence(),
+            //Genera una palabra aleatoria para la categoría.
             "category"=>fake()->word(),
+            //Genera un texto de hasta 1000 caracteres.
             "content"=>fake()->text(1000),
+            //Genera una fecha y hora aleatoria.
             "published_at"=>fake()->dateTime(),
         ];
     }

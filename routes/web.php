@@ -7,16 +7,16 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
-use App\Models\Post;
 
-// Nota: La importación de App\Models\Post no es necesaria aquí
 
-// ----------------------------------------------------------------------
-// 1. RUTAS PÚBLICAS Y PRINCIPALES
-// ----------------------------------------------------------------------
 
-// Ruta principal ('/') que utiliza el controlador invokable (si lo tienes)
-Route::get('/', HomeController::class);
+
+
+
+
+
+
+// Route::get('/', HomeController::class);
 //RUTA USERS:
 Route::get("/users",[UserController::class,"index"])->name("users.index");
 
@@ -44,17 +44,17 @@ Route::get('auth/google/callback', [GoogleAuthController::class, 'handleGoogleCa
 Route::get('book-meeting', [GoogleAuthController::class, 'bookMeeting'])->name('book.meeting');
 
 
-// ----------------------------------------------------------------------
-// 2. RUTAS PARA EL RECURSO 'POSTS' (CRUD)
-// Orden: Fijo antes que Dinámico
-// ----------------------------------------------------------------------
+
+//  (CRUD)
+// Orden:  SIEMPRE Fijo antes que Dinámico
+
 
 // INDEX: GET /posts
 // Muestra el listado de todos los posts
 Route::get("/posts", [PostController::class, "index"])->name("posts.index");
 
 
-// CREATE: GET /posts/create  <-- RUTA FIJA (Máxima prioridad)
+// CREATE: GET /posts/create  
 // Muestra el formulario para crear un nuevo post.
 Route::get("/posts/create", [PostController::class, "create"])->name("posts.create");
 
@@ -63,11 +63,13 @@ Route::get("/posts/create", [PostController::class, "create"])->name("posts.crea
 Route::post("/posts", [PostController::class, "store"])->name("posts.store");
 
 
-// EDIT: GET /posts/{post}/edit  <-- RUTA DINÁMICA PERO ESPECÍFICA
+// EDIT: GET /posts/{post}/edit  
 // Muestra el formulario para editar un post específico.
 Route::get("/posts/{post}/edit", [PostController::class, "edit"])->name("posts.edit");
 
 
+//BUY: POST //post/{post}/buy
+//Gestiona la compra de un post a cambio de un email
 
 Route::post("/post/{post}/buy", [PostController::class, "buy"])->name("posts.buy");
 
@@ -76,6 +78,7 @@ Route::post("/post/{post}/buy", [PostController::class, "buy"])->name("posts.buy
 // Procesa y guarda los cambios de un post específico.
 Route::put("/posts/{post}", [PostController::class, "update"])->name("posts.update");
 
+
 // DESTROY: DELETE /posts/{post}
 // Elimina un post específico.
 Route::delete("/posts/{post}", [PostController::class, "destroy"])->name("posts.destroy");
@@ -83,7 +86,7 @@ Route::delete("/posts/{post}", [PostController::class, "destroy"])->name("posts.
 
 
 
-// SHOW: GET /posts/{post}  <-- RUTA DINÁMICA 
+// SHOW: GET /posts/{post}  
 // Muestra un post individual. (Debe ir al final para que 'create' y 'edit' no colisionen).
 Route::get("/posts/{post}", [PostController::class, "show"])->name("posts.show");
 
