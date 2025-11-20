@@ -47,6 +47,8 @@ class PostController extends Controller
     //CREAR EN LA BASE DE DATOS
     // 3. STORE: Guarda los datos de un nuevo post en la BD (POST)
     public function store(Request $request){
+        //Request es un objeto de Laravel que recoge los datos enviados
+        //por el usuario desde el formulario
         // dd($request->all());
 
        //VALIDACIONES FORMULARIO:

@@ -7,8 +7,8 @@ Incluye un **CRUD completo de posts**, sistema de **filtros dinámicos**, una fu
 
 ## Tecnologías utilizadas
 
--   PHP 8+
--   Laravel 10
+-   PHP
+-   Laravel 12
 -   Composer
 -   Blade Templates
 -   MySQL
@@ -16,7 +16,7 @@ Incluye un **CRUD completo de posts**, sistema de **filtros dinámicos**, una fu
 -   Laravel Socialite
 -   Google Cloud Console
 -   Google Calendar API
--   HTML / CSS / Bootstrap
+-   HTML
 
 ---
 
@@ -94,7 +94,7 @@ Guarda nuevos tokens en BD cuando Google los envía
 
 # Estructura técnica
 
-Controladores:
+##Controladores:
 
 PostController
 
@@ -104,7 +104,7 @@ GoogleAuthController
 
 DashboardController
 
-Modelos:
+##Modelos:
 
 Post
 
@@ -112,11 +112,11 @@ Purchase
 
 User (con campos adicionales para Google)
 
-Servicios:
+##Servicios:
 
 App\Services\GoogleCalendarService.php
 
-Tablas principales:
+##Tablas principales:
 
 posts
 
