@@ -14,7 +14,9 @@ use App\Http\Controllers\UserController;
 
 
 
-
+Route::get("carmen", function(){
+    return "Hola soy yo ";
+});
 
 // Route::get('/', HomeController::class);
 //RUTA USERS:
@@ -26,21 +28,31 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Cierra la sesión del usuario y lo redirige a la página principal /.
 Route::post("/logout",function(){
     Auth::logout();
     return redirect("/");
 })->name("logout");
 
+//Muestra la vista dashboard.blade.php,
+//pero solo si el usuario está logueado gracias al middleware auth
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth');
 
+//Abre la vista meeting.blade.php,
+//también protegida por el middleware auth
 Route::get('/meeting', function () {
     return view('meeting');
 })->middleware('auth')->name('meeting');
 
+//INICIA LA CONEXION CON GOOGLE
 Route::get('auth/google', [GoogleAuthController::class, 'redirectToGoogle'])->name('google.redirect');
+
+//RECIBE LOS DATOS
 Route::get('auth/google/callback', [GoogleAuthController::class, 'handleGoogleCallBack']);
+
+//CREA LA REUNION
 Route::get('book-meeting', [GoogleAuthController::class, 'bookMeeting'])->name('book.meeting');
 
 

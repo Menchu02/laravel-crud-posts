@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
+            //declaramos que su llave foranea es post_id
             $table->foreignId("post_id")->constrained()->onDelete("cascade");
             $table->string("email");
             $table->string("status")->default("pending");

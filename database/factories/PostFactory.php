@@ -19,6 +19,7 @@ class PostFactory extends Factory
         return [
             //Genera Título aleatorio
             //SENTENCE() = ORACION
+            //fake() helper que genera datos falsos
             "title"=>fake()->sentence(),
             //Genera una palabra aleatoria para la categoría.
             "category"=>fake()->word(),

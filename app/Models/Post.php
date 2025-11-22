@@ -39,11 +39,13 @@ class Post extends Model
         return Attribute::make(
             //SET PARA GUARDAR EN BASE DE DATOS
             set:function($value){
+                //todo minusculas
                 return strtolower($value);
             },
             // GET PARA CUANDO RECUPERA EL VALOR DE LA BD PARA REENDERIZARLO
             // EN EL NAVEGADOR WEB
             get:function ($value){
+                //Primera en mayúscula
                 return ucfirst($value);
             }
 

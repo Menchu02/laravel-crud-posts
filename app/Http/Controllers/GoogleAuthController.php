@@ -49,7 +49,7 @@ public function handleGoogleCallBack()
 //Luego inicio sesión al usuario y lo redirijo al dashboard.
 {
   try {
-            // 1. Obtiene la información del usuario autenticado
+            // La librería Socialite se comunica con Google usando el código de autorización recibido y solicita los detalles del usuario.
             $googleUser = Socialite::driver('google')->stateless()->user();
            // Esto llama a Google y trae:
 
@@ -129,7 +129,7 @@ public function handleGoogleCallBack()
                 $end->toRfc3339String()
             );
 
-            // 5. Redirigir con éxito
+            // 5. Redirigir con éxito, GUARDA EL ENLACE EN LA SESION BAJO MEETLINK
             return redirect()->route("meeting")->with("meetLink",$event->hangoutLink);
 
         } catch (\Exception $e) {

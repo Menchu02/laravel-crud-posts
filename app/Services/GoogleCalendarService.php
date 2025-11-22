@@ -27,6 +27,7 @@ class GoogleCalendarService
         $this->user = $user;
         $this->client = new Client();
 
+        //INICIALIZA EL CLIENTE CON CREDENCIALES
         // 1. Configurar credenciales de la aplicación (CLIENT_ID, CLIENT_SECRET)
         $this->client->setClientId(config('services.google.client_id'));
         $this->client->setClientSecret(config('services.google.client_secret'));
@@ -34,6 +35,7 @@ class GoogleCalendarService
         $this->client->addScope(Calendar::CALENDAR);
         
         // 2. Establecer el token de acceso del usuario
+        //CARGA TOKENS DEL USUARIO
         $accessToken = [
             'access_token' => $user->google_token,
             'refresh_token' => $user->google_refresh_token,
@@ -86,7 +88,11 @@ class GoogleCalendarService
      * @param string $timeZone Zona horaria (ej: 'Europe/Madrid').
      * @return Event Evento de Google creado.
      */
+
+
+    //METODO Q CONSTRUYE UN EVENTO CON TITULO DESCRIPCION....
     public function createEvent(
+        //TITULO
         string $summary, 
         string $description, 
         string $startDateTime, 
@@ -105,6 +111,7 @@ class GoogleCalendarService
                 'dateTime' => $endDateTime,
                 'timeZone' => $timeZone,
             ],
+            //GENERA AUTOMATICAMENTE UN ENLACE
             'conferenceData' => [
     'createRequest' => [
         'conferenceSolutionKey' => ['type' => 'hangoutsMeet'],
@@ -112,10 +119,10 @@ class GoogleCalendarService
     ],
 ],
 
-            // Puedes agregar invitados, recordatorios, etc., aquí si es necesario
+            
         ]);
 
-        // 'primary' es el identificador del calendario principal del usuario
+        // USA EL CALLENDARIO PRIMARY DEL USUARIO CONETADO
         $calendarId = 'primary';
         
     return $this->calendarService->events->insert($calendarId, $event, ['conferenceDataVersion' => 1]);

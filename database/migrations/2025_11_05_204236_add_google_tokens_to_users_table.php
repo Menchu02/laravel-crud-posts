@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //Añado dos campos nuevos a users para google meet
         Schema::table('users', function (Blueprint $table) {
             // Campos necesarios para Google OAuth
             $table->longText('google_token')->nullable(); 
